@@ -1,0 +1,26 @@
+#!/bin/sh
+dot=_
+
+sphinx-quickstart \
+  --sep \
+  --dot=${dot} \
+  --language=ja \
+  --suffix=.rst \
+  --master=index \
+  --ext-intersphinx \
+  --ext-todo \
+  --ext-ifconfig \
+  --extensions=sphinx.ext.githubpages \
+  --use-make-mode \
+  --makefile \
+  --batchfile \
+  --templatedir=/files/templates/quickstart \
+  -d use_diags=True \
+  -d diag_fontpath=/fonts/NotoSansCJKjp-Regular.ttf \
+  -d diag_image_format=SVG \
+  -d diag_antialias=True \
+  -d html_theme=sphinx_rtd_theme \
+  "$@"
+
+cp -pr /files/css ./source/${dot}static/css
+cp -pr /files/js ./source/${dot}static/js
