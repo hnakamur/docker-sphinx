@@ -1,2 +1,7 @@
 #!/bin/sh
-exec docker run --rm -it -v $PWD/documents:/documents -p 8000:8000 hnakamur/sphinx "$@"
+if [ -n "$PORT" ]; then
+  port_opt="-p $PORT:8000 "
+else
+  port_opt=""
+fi
+exec docker run --rm -it -v $PWD/documents:/documents $port_opt hnakamur/sphinx "$@"
