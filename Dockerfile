@@ -20,7 +20,7 @@ RUN apk add --update --no-cache \
     && apk del build-base
 
 COPY files files
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh my-sphinx-quickstart /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 RUN mkdir documents

@@ -51,13 +51,13 @@ extensions = [
 {%- for ext in extensions %}
     '{{ ext }}',
 {%- endfor %}
-{% if use_diags -%}
+{%- if use_diags %}
     'sphinxcontrib.blockdiag',
     'sphinxcontrib.seqdiag',
     'sphinxcontrib.actdiag',
     'sphinxcontrib.nwdiag',
     'sphinxcontrib.blockdiag',
-{% endif -%}
+{%- endif %}
 ]
 
 {% if use_diags -%}
@@ -228,3 +228,9 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 {%- endif %}
+
+# ----- pdf print styles settings
+def setup(app):
+    app.add_stylesheet('css/print-reset.css')
+    app.add_stylesheet('css/print-theme-default.css')
+    app.add_javascript('js/print.js')
