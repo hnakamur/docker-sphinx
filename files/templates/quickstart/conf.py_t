@@ -51,8 +51,32 @@ extensions = [
 {%- for ext in extensions %}
     '{{ ext }}',
 {%- endfor %}
+{% if use_diags -%}
+    'sphinxcontrib.blockdiag',
+    'sphinxcontrib.seqdiag',
+    'sphinxcontrib.actdiag',
+    'sphinxcontrib.nwdiag',
+    'sphinxcontrib.blockdiag',
+{% endif -%}
 ]
 
+{% if use_diags -%}
+blockdiag_fontpath = '{{ diag_fontpath }}'
+seqdiag_fontpath = '{{ diag_fontpath }}'
+actdiag_fontpath = '{{ diag_fontpath }}'
+nwdiag_fontpath = '{{ diag_fontpath }}'
+
+blockdiag_html_image_format = '{{ diag_image_format }}'
+seqdiag_html_image_format = '{{ diag_image_format }}'
+actdiag_html_image_format = '{{ diag_image_format }}'
+nwdiag_html_image_format = '{{ diag_image_format }}'
+
+blockdiag_antialias = {{ diag_antialias }}
+seqdiag_antialias = {{ diag_antialias }}
+actdiag_antialias = {{ diag_antialias }}
+nwdiag_antialias = {{ diag_antialias }}
+
+{% endif -%}
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['{{ dot }}templates']
 
