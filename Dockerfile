@@ -23,7 +23,6 @@ RUN apk add --update --no-cache \
     && apk del build-base
 
 COPY files files
-COPY quickstart.py /usr/local/bin/
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
