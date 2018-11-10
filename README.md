@@ -1,54 +1,76 @@
 # Sphinx documentation with Docker
 
 ## Quickstart
-
-To start `suttang/sphinx-rtd-theme`, You can use `sphinx-quickstart`
+To start `hnakamur/sphinx`, You can use `my-sphinx-quickstart` (custom `sphinx-quickstart`)
 
 http://docs.readthedocs.io/en/latest/getting_started.html
 
 ```
-docker run --rm -it -v $(pwd)/documents:/documents suttang/sphinx-rtd-theme sphinx-quickstart
+./run.sh my-sphinx-quickstart
 ```
 
 ```
-docker run --rm -it -v $(pwd)/documents:/documents suttang/sphinx-rtd-theme sphinx-quickstart -q -p "YourProjectName" -a "suttang <suttang@gmail.com>" -v 1.0.0 --sep --no-batchfile
+./run.sh my-sphinx-quickstart -q -p "YourProjectName" -a "John Doe <john.doe@example.com>" -v 1.0.0
 ```
 
 
 ## Build your documents
 
-The default `CMD` of `suttang/sphinx-rtd-theme` is `make html`.
+The default `CMD` of `hnakamur/sphinx` is `make html`.
 
 ``` 
-docker run --rm -it -v $(pwd)/documents:/documents suttang/sphinx-rtd-theme
+./run.sh
 ```
 
 Your can use your favorite build commands.
 
 ```
 # make html
-docker run --rm -it -v $(pwd)/documents:/documents suttang/sphinx-rtd-theme make html
+./run.sh make html
 
 # sphinx-build
-docker run --rm -it -v $(pwd)/documents:/documents suttang/sphinx-rtd-theme sphinx-build -b html source build
+./run.sh sphinx-build -b html source build
 ```
 
 This dockerfile include [sphinx-autobuild](https://github.com/GaretJax/sphinx-autobuild)
 
 ```
 # use autobuild with make
-docker run --rm -it -v $(pwd)/documents:/documents -p 8000:8000 suttang/sphinx-rtd-theme make livehtml
+./run.sh make livehtml
 
 # use autobuild with sphinx-autobuild
-docker run --rm -it -v $(pwd)/documents:/documents -p 8000:8000 suttang/sphinx-rtd-theme sphinx-autobuild -b html $SOURCE $OUTPUT -H 0.0.0.0
+./run.sh sphinx-autobuild -b html $SOURCE $OUTPUT -H 0.0.0.0
 ```
 
+## Run shell for interactive use
+
+```
+./run.sh sh
+```
+
+Then run the following commands in the running container.
+
+```
+my-sphinx-quickstart
+```
+
+```
+make html
+```
+
+```
+make livehtml
+```
 
 ## Build dockerfile
 
 ```
-docker build -t "suttang/sphinx-rtd-theme" .
+./build.sh
 ```
+
+## Fork this project
+
+When you fork this project, replace `hnakamur/sphinx` in `run.sh` and `build.sh` with your favorite name.
 
 
 Thank you.
