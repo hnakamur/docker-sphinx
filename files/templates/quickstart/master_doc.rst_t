@@ -31,12 +31,14 @@ Welcome to {{ project }}'s documentation!
       }
     }
 
-コードブロックのサンプルです。使用している Sphinx のテーマが長い行を折り返すか折り返さないかを確認するために入れています。
+コードブロックのサンプルです。使用している Sphinx のテーマが長い行を折り返すか折り返さないかを確認するた>めに入れています。ほとんどのテーマは折り返すようなので :code:`:linenos:` を常に指定して行番号を表示するのが良いでしょう。
 
 .. code-block:: console
+    :linenos:
 
     echo hello
     echo longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong
+    echo goodbye
 
 {{ mastertoctree }}
 
