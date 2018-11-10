@@ -9,7 +9,6 @@ RUN apk add --update --no-cache \
         freetype-dev \
     && pip install \
         sphinx \
-        sphinx_rtd_theme \
         sphinx-autobuild \
         sphinxcontrib-blockdiag \
         sphinxcontrib-seqdiag \
@@ -18,6 +17,8 @@ RUN apk add --update --no-cache \
     && mkdir /fonts \
     && wget -O /fonts/NotoSansCJKjp-Regular.ttf https://github.com/hnakamur/Noto-Sans-CJK-JP/raw/master/fonts/NotoSansCJKjp-Regular.ttf \
     && apk del build-base
+
+RUN pip install solar-theme
 
 COPY files files
 COPY docker-entrypoint.sh my-sphinx-quickstart /usr/local/bin/
