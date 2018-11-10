@@ -231,6 +231,7 @@ todo_include_todos = True
 
 # -- pdf print styles settings -----------------------------------------------
 def setup(app):
+    app.add_stylesheet('css/code-block.css')
     app.add_stylesheet('css/print-reset.css')
     app.add_stylesheet('css/print-theme-default.css')
     app.add_javascript('js/print.js')

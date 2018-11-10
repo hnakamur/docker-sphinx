@@ -1,0 +1,23 @@
+div.document div.body {
+    max-width: 1200px;
+}
+
+div.highlight pre {
+    white-space: pre;       /* css-3 */
+    white-space: -moz-pre;  /* Mozilla, since 1999 */
+    white-space: -pre;      /* Opera 4-6 */
+    white-space: -o-pre;    /* Opera 7 */
+    word-wrap: normal;      /* Internet Explorer 5.5+ */
+
+    overflow-x: auto;
+}
+
+table.highlighttable td.code div.highlight pre {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+    max-width: 960px;
+}
