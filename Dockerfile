@@ -15,11 +15,8 @@ RUN apk add --update --no-cache \
         sphinxcontrib-seqdiag \
         sphinxcontrib-actdiag \
         sphinxcontrib-nwdiag \
-    && wget -O ipag00303.zip http://ipafont.ipa.go.jp/old/ipafont/ipag00303.php \
-    && unzip ipag00303.zip \
     && mkdir /fonts \
-    && mv ipag00303 /fonts/ipag00303 \
-    && rm ipag00303.zip \
+    && wget -O /fonts/NotoSansCJKjp-Regular.ttf https://github.com/hnakamur/Noto-Sans-CJK-JP/raw/master/fonts/NotoSansCJKjp-Regular.ttf \
     && apk del build-base
 
 COPY files files
