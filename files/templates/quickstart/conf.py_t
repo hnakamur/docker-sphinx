@@ -135,6 +135,12 @@ html_static_path = ['{{ dot }}static']
 #
 # html_sidebars = {}
 
+# If this is not None, a 'Last updated on:' timestamp is inserted at every
+# page bottom, using the given strftime() format. The empty string is
+# equivalent to '%b %d, %Y' (or a locale-dependent equivalent).
+# http://www.sphinx-doc.org/ja/master/usage/configuration.html#confval-html_last_updated_fmt
+# https://docs.python.org/3/library/time.html#time.strftime
+html_last_updated_fmt = '%Y-%m-%d %H:%M'
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
