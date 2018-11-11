@@ -22,23 +22,7 @@ following command on the docker host.
 
 ## Build your documents
 
-The default `CMD` of `hnakamur/sphinx` is `sh`.
-
-``` 
-./run.sh
-```
-
-Then you can run your favorite build commands on the container.
-
-```
-make html
-```
-
-When you are done, press Control-D to exit the shell and stop the
-container.
-
-Also, You can run your favorite build commands directlyy without
-running a shell.
+You can run your favorite build commands.
 
 ```
 # make html
@@ -54,10 +38,10 @@ This dockerfile include [sphinx-autobuild](https://github.com/GaretJax/sphinx-au
 
 ```
 # use autobuild with make
-PORT=8000 ./run.sh make livehtml
+./live.sh make livehtml
 
 # use autobuild with sphinx-autobuild
-PORT=8000 ./run.sh sphinx-autobuild -b html $SOURCE $OUTPUT -H 0.0.0.0
+./live.sh sphinx-autobuild -b html $SOURCE $OUTPUT -H 0.0.0.0
 ```
 
 However with the above commands, you cannot stop the container by pressing Control-C.
@@ -68,7 +52,7 @@ I recommend running a shell and then run `make livehtml` in the container.
 First on the docker host:
 
 ```
-PORT=8000 ./run.sh
+./live.sh
 ```
 
 Then on the docker container:
@@ -77,8 +61,16 @@ Then on the docker container:
 make livehtml
 ```
 
+You can see the output at http://127.0.0.1:8000
+If you would like to change the port from the default 8000, run `live.sh` like:
+
+```
+PORT=8888 ./live.sh
+```
+
 When you are done, press Control-C to stop autobuild and then press Control-D
 to exit the shell and stop the container.
+
 
 ## Build dockerfile
 
