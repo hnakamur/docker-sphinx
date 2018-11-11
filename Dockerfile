@@ -21,6 +21,7 @@ RUN apk add --update --no-cache \
 RUN pip install solar-theme
 
 COPY files files
+COPY my-sphinx-quickstart /usr/local/bin/
 
 RUN mkdir documents
 WORKDIR /documents
