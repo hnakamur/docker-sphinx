@@ -21,5 +21,5 @@ sphinx-quickstart \
   -d diag_antialias=True \
   "$@"
 
-cp -pr /files/css ./source/${dot}static/css
-cp -pr /files/js ./source/${dot}static/js
+cp -r /files/css ./source/${dot}static/css
+cp -r /files/js ./source/${dot}static/js
