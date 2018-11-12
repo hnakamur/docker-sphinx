@@ -7,6 +7,7 @@ RUN apk add --update --no-cache \
         libjpeg-turbo-dev \
         freetype \
         freetype-dev \
+        tzdata \
     && pip install \
         sphinx \
         sphinx-autobuild \
@@ -16,7 +17,10 @@ RUN apk add --update --no-cache \
         sphinxcontrib-nwdiag \
     && mkdir /fonts \
     && wget -O /fonts/NotoSansCJKjp-Regular.ttf https://github.com/hnakamur/Noto-Sans-CJK-JP/raw/master/fonts/NotoSansCJKjp-Regular.ttf \
-    && apk del build-base
+    && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+    && apk del build-base tzdata \
+    && mkdir -p /usr/share/zoneinfo/Asia \
+    && ln /etc/localtime /usr/share/zoneinfo/Asia/Tokyo
 
 RUN pip install solar-theme
 
