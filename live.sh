@@ -1,2 +1,4 @@
 #!/bin/sh
-exec docker run --rm -it -v $PWD/documents:/documents -p ${PORT:-8000}:8000 hnakamur/sphinx "$@"
+dockertag="${DOCKER_TAG:-hnakamur/sphinx}"
+basedir="${BASE_DIR:-$PWD}"
+exec docker run --rm -it -v "$basedir:/documents" -p ${PORT:-8000}:8000 "$dockertag" "$@"
