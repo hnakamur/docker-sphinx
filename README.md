@@ -22,13 +22,6 @@ http://docs.readthedocs.io/en/latest/getting_started.html
 ./docker-sphinx/run.sh my-sphinx-quickstart -q -p "YourProjectName" -a "John Doe <john.doe@example.com>" -r 1.0
 ```
 
-If you want to edit documents with non-root user, you need to run the
-following command on the docker host.
-
-```
-./docker-sphinx/chown.sh
-```
-
 ## Build your documents
 
 You can run your favorite build commands.

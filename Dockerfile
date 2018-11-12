@@ -22,6 +22,12 @@ RUN apk add --update --no-cache \
     && mkdir -p /usr/share/zoneinfo/Asia \
     && ln /etc/localtime /usr/share/zoneinfo/Asia/Tokyo
 
+RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+    gosu
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
 RUN pip install solar-theme
 
 COPY files files
