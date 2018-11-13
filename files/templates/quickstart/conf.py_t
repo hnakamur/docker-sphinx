@@ -89,6 +89,7 @@ graphviz_output_format = '{{ graphviz_output_format }}'
 
 {% endif -%}
 {%- if use_plantuml %}
+plantuml = 'java -jar /app/plantuml.jar'
 plantuml_output_format = '{{ plantuml_output_format }}'
 
 {% endif -%}
