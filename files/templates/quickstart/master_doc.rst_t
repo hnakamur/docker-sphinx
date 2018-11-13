@@ -68,7 +68,7 @@ Welcome to {{ project }}'s documentation!
     A --> User: Done
     deactivate A
 
-コードブロックのサンプルです。使用している Sphinx のテーマが長い行を折り返すか折り返さないかを確認するた>めに入れています。
+コードブロックのサンプルです。使用している Sphinx のテーマが長い行を折り返すか折り返さないかを確認するために入れています。
 
 .. code-block:: console
 
