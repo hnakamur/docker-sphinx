@@ -22,6 +22,8 @@ sphinx-quickstart \
   -d use_graphviz=True \
   -d graphviz_default_fontname=sans-serif \
   -d graphviz_output_format=svg \
+  -d use_plantuml=True \
+  -d plantuml_output_format=svg \
   "$@"
 
 cp -r /files/css ./source/${dot}static/css
