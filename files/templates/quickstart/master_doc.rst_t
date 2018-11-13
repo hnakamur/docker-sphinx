@@ -31,6 +31,14 @@ Welcome to {{ project }}'s documentation!
       }
     }
 
+`sphinx.ext.graphviz – Graphviz のSphinx拡張 <http://www.sphinx-doc.org/ja/stable/ext/graphviz.html>`_ を使った `Graphviz <http://graphviz.org/>`_ のグラフ埋め込みのサンプルです。
+
+.. graphviz::
+
+   digraph foo {
+      "bar" -> "baz";
+   }
+
 コードブロックのサンプルです。使用している Sphinx のテーマが長い行を折り返すか折り返さないかを確認するた>めに入れています。
 
 .. code-block:: console

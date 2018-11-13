@@ -28,6 +28,9 @@ COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
+RUN apk add --update --no-cache \
+        graphviz
+
 RUN pip install solar-theme
 
 COPY files files
