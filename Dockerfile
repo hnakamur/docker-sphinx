@@ -1,4 +1,4 @@
-FROM python:3-stretch AS builder
+FROM python:3-stretch
 
 RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /etc/apt/sources.list \ 
     && apt-get update \
@@ -7,6 +7,9 @@ RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /et
         libturbojpeg-dev \
         zlib1g-dev \
         libfreetype6-dev \
+        gosu \
+        plantuml \
+        graphviz \
     && pip install \
         sphinx \
         sphinx-autobuild \
@@ -15,21 +18,13 @@ RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /et
         sphinxcontrib-actdiag \
         sphinxcontrib-nwdiag \
         sphinxcontrib-plantuml \
-        solar-theme
-
-
-FROM python:3-stretch
-
-COPY --from=builder /usr/local/bin/ /usr/local/bin/
-COPY --from=builder /usr/local/lib/ /usr/local/lib/
-
-RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /etc/apt/sources.list \ 
-    && apt-get update \
-    && apt-get install -y \
-        gosu \
-        plantuml \
-        graphviz \
+        solar-theme \
     && cp -p /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+    && apt-get remove -y --autoremove \
+        build-essential \
+        libturbojpeg-dev \
+        zlib1g-dev \
+        libfreetype6-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
