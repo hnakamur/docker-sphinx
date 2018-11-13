@@ -19,6 +19,9 @@ sphinx-quickstart \
   -d diag_fontpath=/fonts/NotoSansCJKjp-Regular.ttf \
   -d diag_image_format=SVG \
   -d diag_antialias=True \
+  -d use_graphviz=True \
+  -d graphviz_default_fontname=sans-serif \
+  -d graphviz_output_format=svg \
   "$@"
 
 cp -r /files/css ./source/${dot}static/css
