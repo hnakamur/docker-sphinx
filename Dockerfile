@@ -7,7 +7,6 @@ RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /et
         libturbojpeg-dev \
         zlib1g-dev \
         libfreetype6-dev \
-        tzdata \
         gosu \
         plantuml \
         graphviz \
@@ -19,24 +18,19 @@ RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /et
         sphinxcontrib-actdiag \
         sphinxcontrib-nwdiag \
         sphinxcontrib-plantuml \
-    && mkdir /fonts \
-    && wget -O /fonts/NotoSansCJKjp-Regular.ttf https://github.com/hnakamur/Noto-Sans-CJK-JP/raw/master/fonts/NotoSansCJKjp-Regular.ttf \
-    && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
-    && apt-get remove --autoremove -y \
+        solar-theme \
+    && cp -p /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+    && apt-get remove -y --autoremove \
         build-essential \
         libturbojpeg-dev \
         zlib1g-dev \
         libfreetype6-dev \
-        tzdata \
-    && mkdir -p /usr/share/zoneinfo/Asia \
-    && ln /etc/localtime /usr/share/zoneinfo/Asia/Tokyo \
     && rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-RUN pip install solar-theme
 COPY files files
 COPY my-sphinx-quickstart /usr/local/bin/
 
