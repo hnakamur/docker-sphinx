@@ -1,4 +1,4 @@
-FROM python:3-stretch
+FROM python:3-stretch AS builder
 
 RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /etc/apt/sources.list \ 
     && apt-get update \
@@ -7,10 +7,6 @@ RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /et
         libturbojpeg-dev \
         zlib1g-dev \
         libfreetype6-dev \
-        tzdata \
-        gosu \
-        plantuml \
-        graphviz \
     && pip install \
         sphinx \
         sphinx-autobuild \
@@ -19,24 +15,27 @@ RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /et
         sphinxcontrib-actdiag \
         sphinxcontrib-nwdiag \
         sphinxcontrib-plantuml \
-    && mkdir /fonts \
-    && wget -O /fonts/NotoSansCJKjp-Regular.ttf https://github.com/hnakamur/Noto-Sans-CJK-JP/raw/master/fonts/NotoSansCJKjp-Regular.ttf \
-    && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
-    && apt-get remove --autoremove -y \
-        build-essential \
-        libturbojpeg-dev \
-        zlib1g-dev \
-        libfreetype6-dev \
-        tzdata \
-    && mkdir -p /usr/share/zoneinfo/Asia \
-    && ln /etc/localtime /usr/share/zoneinfo/Asia/Tokyo \
+        solar-theme
+
+
+FROM python:3-stretch
+
+COPY --from=builder /usr/local/bin/ /usr/local/bin/
+COPY --from=builder /usr/local/lib/ /usr/local/lib/
+
+RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /etc/apt/sources.list \ 
+    && apt-get update \
+    && apt-get install -y \
+        gosu \
+        plantuml \
+        graphviz \
+    && cp -p /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
     && rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-RUN pip install solar-theme
 COPY files files
 COPY my-sphinx-quickstart /usr/local/bin/
 
