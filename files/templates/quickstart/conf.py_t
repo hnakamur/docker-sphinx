@@ -61,6 +61,9 @@ extensions = [
 {%- if use_graphviz %}
     'sphinx.ext.graphviz',
 {%- endif %}
+{%- if use_plantuml %}
+    'sphinxcontrib.plantuml',
+{%- endif %}
 ]
 
 {% if use_diags -%}
@@ -83,6 +86,10 @@ nwdiag_antialias = {{ diag_antialias }}
 {% if use_graphviz -%}
 graphviz_dot_args = ['-Gfontname={{ graphviz_default_fontname }}', '-Efontname={{ graphviz_default_fontname }}', '-Nfontname={{ graphviz_default_fontname }}']
 graphviz_output_format = '{{ graphviz_output_format }}'
+
+{% endif -%}
+{%- if use_plantuml %}
+plantuml_output_format = '{{ plantuml_output_format }}'
 
 {% endif -%}
 # Add any paths that contain templates here, relative to this directory.

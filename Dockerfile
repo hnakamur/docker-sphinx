@@ -1,13 +1,16 @@
-FROM python:3-alpine
+FROM python:3-stretch
 
-RUN apk add --update --no-cache \
-        make \
-        build-base \
-        zlib-dev \
-        libjpeg-turbo-dev \
-        freetype \
-        freetype-dev \
+RUN sed -i -e 's|http://deb.debian.org/|http://debian-mirror.sakura.ne.jp/|' /etc/apt/sources.list \ 
+    && apt-get update \
+    && apt-get install -y \
+        build-essential \
+        libturbojpeg-dev \
+        zlib1g-dev \
+        libfreetype6-dev \
         tzdata \
+        gosu \
+        plantuml \
+        graphviz \
     && pip install \
         sphinx \
         sphinx-autobuild \
@@ -15,24 +18,25 @@ RUN apk add --update --no-cache \
         sphinxcontrib-seqdiag \
         sphinxcontrib-actdiag \
         sphinxcontrib-nwdiag \
+        sphinxcontrib-plantuml \
     && mkdir /fonts \
     && wget -O /fonts/NotoSansCJKjp-Regular.ttf https://github.com/hnakamur/Noto-Sans-CJK-JP/raw/master/fonts/NotoSansCJKjp-Regular.ttf \
     && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
-    && apk del build-base tzdata \
+    && apt-get remove --autoremove -y \
+        build-essential \
+        libturbojpeg-dev \
+        zlib1g-dev \
+        libfreetype6-dev \
+        tzdata \
     && mkdir -p /usr/share/zoneinfo/Asia \
-    && ln /etc/localtime /usr/share/zoneinfo/Asia/Tokyo
+    && ln /etc/localtime /usr/share/zoneinfo/Asia/Tokyo \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
-    gosu
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-RUN apk add --update --no-cache \
-        graphviz
-
 RUN pip install solar-theme
-
 COPY files files
 COPY my-sphinx-quickstart /usr/local/bin/
 
