@@ -2,12 +2,11 @@
 #
 
 # You can set these variables from the command line.
-SPHINXOPTS      ?=
-SPHINXBUILD     ?= sphinx-build
-SPHINXAUTOBUILD ?= sphinx-autobuild
-PAPER           ?=
-SOURCEDIR        = {{ rsrcdir }}
-BUILDDIR         = {{ rbuilddir }}
+SPHINXOPTS   ?=
+SPHINXBUILD  ?= sphinx-build
+PAPER        ?=
+SOURCEDIR     = {{ rsrcdir }}
+BUILDDIR      = {{ rbuilddir }}
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_elements.papersize=a4paper
@@ -20,7 +19,6 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) $(O) $(SOURCEDIR)
 .PHONY: help
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  livehtml    to make HTML files whenever source files are modified"
 	@echo "  html        to make standalone HTML files"
 	@echo "  dirhtml     to make HTML files named index.html in directories"
 	@echo "  singlehtml  to make a single large HTML file"
@@ -96,6 +94,3 @@ gettext:
 .PHONY: Makefile
 %: Makefile
 	$(SPHINXBUILD) -b "$@" $(ALLSPHINXOPTS) "$(BUILDDIR)/$@"
-
-livehtml:
-	$(SPHINXAUTOBUILD) -b html $(SOURCEDIR) $(BUILDDIR)/html -H 0.0.0.0
