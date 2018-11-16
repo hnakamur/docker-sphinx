@@ -2,12 +2,15 @@
 
 ## Set up
 
-Add this project to your document project as a git submdoule.
+Clone this project to some directory. In the following example, I clone it to
+my home directory.
 
 ```
-cd ${your_project_directory}
-git submodule add https://github.com/hnakamur/docker-sphinx
+cd $HOME
+git clone https://github.com/hnakamur/docker-sphinx
 ```
+
+Then add `$HOME/docker-sphinx/bin` to your `PATH` environment variable.
 
 ## Quickstart
 To start `hnakamur/sphinx`, You can use `my-sphinx-quickstart` (custom `sphinx-quickstart`)
@@ -15,74 +18,73 @@ To start `hnakamur/sphinx`, You can use `my-sphinx-quickstart` (custom `sphinx-q
 http://docs.readthedocs.io/en/latest/getting_started.html
 
 ```
-./docker-sphinx/run.sh my-sphinx-quickstart
+sphinx-run.sh my-sphinx-quickstart
 ```
 
 ```
-./docker-sphinx/run.sh my-sphinx-quickstart -q -p "YourProjectName" -a "John Doe <john.doe@example.com>" -r 1.0
+sphinx-run.sh my-sphinx-quickstart -q -p "YourProjectName" -a "John Doe <john.doe@example.com>" -r 1.0
 ```
 
 ## Build your documents
+
+The default `CMD` of `hnakamur/docker-sphinx` is `make html`.
+
+Go to the document base directory (which is the parent directory of `source` and `build`)
+and then run `sphinx-run.sh`.
+
+```
+cd ${base_directory}
+sphinx-run.sh
+```
+
+Or you can set `BASE_DIR` environment variable and run `sphinx-run.sh`.
+
+```
+BASE_DIR=${base_directory} sphinx-run.sh
+```
 
 You can run your favorite build commands.
 
 ```
 # make html
-./docker-sphinx/run.sh make html
+sphinx-run.sh make html
 
 # sphinx-build
-./docker-sphinx/run.sh sphinx-build -b html source build
+sphinx-run.sh sphinx-build -b html source build
 ```
 
 ## Autobuild
 
 This dockerfile include [sphinx-autobuild](https://github.com/GaretJax/sphinx-autobuild)
 
-```
-# use autobuild with make
-./docker-sphinx/live.sh make livehtml
-
-# use autobuild with sphinx-autobuild
-./docker-sphinx/live.sh sphinx-autobuild -b html $SOURCE $OUTPUT -H 0.0.0.0
-```
-
-However with the above commands, you cannot stop the container by pressing Control-C.
-You need to run `docker ps` on another terminal to get the container ID and
-run `docker kill $containerID`.
-
-I recommend running a shell and then run `make livehtml` in the container.
-First on the docker host:
+You can start autobuild with running the following command.
 
 ```
-./docker-sphinx/live.sh
-```
-
-Then on the docker container:
-
-```
-make livehtml
+sphinx-livehtml.sh
 ```
 
 You can see the output at http://127.0.0.1:8000
-If you would like to change the port from the default 8000, run `live.sh` like:
+If you would like to change the port and the listen address, run `sphinx-livehtml.sh` as below:
 
 ```
-PORT=8888 ./docker-sphinx/live.sh
+PORT=8888 LISTEN_ADDR=127.0.0.1 sphinx-livehtml.sh
 ```
 
-When you are done, press Control-C to stop autobuild and then press Control-D
-to exit the shell and stop the container.
+When you are done, press Control-C to stop autobuild and go back to the prompt.
 
 
 ## Build dockerfile
 
 ```
-./docker-sphinx/build.sh
+docker build -t hnakamur/sphinx ${directory_this_project}
 ```
 
 ## Fork this project
 
-When you fork this project, replace `hnakamur/sphinx` in `run.sh` and `build.sh` with your favorite name.
+When you fork this project, change the image tag `hnakamur/sphinx` to
+`${your_docker_ID}/${your_favorite_container_name}` when you build
+a docker image, and then replace `hnakamur/sphinx` in `sphinx-run.sh`
+and `sphinx-livehtml.sh` with that tag.
 
 
 Thank you.
