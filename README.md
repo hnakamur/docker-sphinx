@@ -24,6 +24,12 @@ http://docs.readthedocs.io/en/latest/getting_started.html
 
 ## Build your documents
 
+The default `CMD` of `hnakamur/docker-sphinx` is `make html`.
+
+```
+./docker-sphinx/sphinx-run.sh
+```
+
 You can run your favorite build commands.
 
 ```

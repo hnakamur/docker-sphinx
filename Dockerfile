@@ -61,4 +61,4 @@ RUN mkdir documents
 WORKDIR /documents
 VOLUME /documents
 
-CMD ["sh"]
+CMD ["make", "html"]
