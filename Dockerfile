@@ -16,6 +16,7 @@ RUN apk add --update --no-cache \
         sphinxcontrib-actdiag \
         sphinxcontrib-nwdiag \
         sphinxcontrib-plantuml \
+        git+https://github.com/hnakamur/japanese-text-join@call_declare_namescape \
         solar-theme
 
 FROM python:3-alpine

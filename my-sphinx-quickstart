@@ -10,7 +10,7 @@ sphinx-quickstart \
   --ext-intersphinx \
   --ext-todo \
   --ext-ifconfig \
-  --extensions=sphinx.ext.githubpages \
+  --extensions=sphinx.ext.githubpages,sphinxcontrib.japanese_text_join \
   --use-make-mode \
   --makefile \
   --batchfile \
