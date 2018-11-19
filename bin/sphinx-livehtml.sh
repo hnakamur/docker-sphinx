@@ -5,7 +5,7 @@ listen_addr="${LISTEN_ADDR:-0.0.0.0}"
 if [ -n "$BASE_DIR" ]; then
   cd "$BASE_DIR"
 fi
-if [ "$(uname -s)" == "Darwin" ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
   uid_opts="-e USE_GOSU=0"
 else
   uid_opts="-e USE_GOSU=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)"
