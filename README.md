@@ -23,11 +23,11 @@ http://docs.readthedocs.io/en/latest/getting_started.html
 On Linux, you need to pass uid and gid to mount the document directory
 
 ```
-docker run --rm -it -v "$PWD:/documents" -e USE_GOSU=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx my-sphinx-quickstart
+docker run --rm -it -v "$PWD:/documents" -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx my-sphinx-quickstart
 ```
 
 ```
-docker run --rm -it -v "$PWD:/documents" -e USE_GOSU=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx my-sphinx-quickstart -p "YourProjectName" -a "John Doe <john.doe@example.com>" -r 1.0
+docker run --rm -it -v "$PWD:/documents" -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx my-sphinx-quickstart -p "YourProjectName" -a "John Doe <john.doe@example.com>" -r 1.0
 ```
 
 ### macOS
@@ -59,17 +59,17 @@ The default `CMD` of `hnakamur/sphinx` is `make html`.
 ### Linux
 
 ```
-docker run --rm -it -v "$PWD:/documents" -e USE_GOSU=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx
+docker run --rm -it -v "$PWD:/documents" -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx
 ```
 
 You can run your favorite build commands.
 
 ```
 # make html
-docker run --rm -it -v "$PWD:/documents" -e USE_GOSU=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx make html
+docker run --rm -it -v "$PWD:/documents" -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx make html
 
 # sphinx-build
-docker run --rm -it -v "$PWD:/documents" -e USE_GOSU=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx sphinx-build -b html source build
+docker run --rm -it -v "$PWD:/documents" -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx sphinx-build -b html source build
 ```
 
 ### macOS
@@ -111,7 +111,7 @@ This dockerfile include [sphinx-autobuild](https://github.com/GaretJax/sphinx-au
 ### Linux
 
 ```
-docker run --rm -it -v "$PWD:/documents" -p 8000:8000 -e USE_GOSU=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx sphinx-autobuild source build/html -H 0.0.0.0
+docker run --rm -it -v "$PWD:/documents" -p 8000:8000 -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx sphinx-autobuild source build/html -H 0.0.0.0
 ```
 
 You can see the output at http://127.0.0.1:8000
@@ -119,7 +119,7 @@ You can see the output at http://127.0.0.1:8000
 If you would like to change the port and the listen address, for example 8888 and 127.0.0.1
 
 ```
-docker run --rm -it -v "$PWD:/documents" -p 8888:8000 -e USE_GOSU=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx sphinx-autobuild source build/html -H 127.0.0.1
+docker run --rm -it -v "$PWD:/documents" -p 8888:8000 -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx sphinx-autobuild source build/html -H 127.0.0.1
 ```
 
 When you are done, press Control-C to stop autobuild and go back to the prompt.
