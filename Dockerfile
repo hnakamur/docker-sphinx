@@ -11,7 +11,7 @@ RUN apk add --update --no-cache \
         freetype-dev \
         tzdata \
     && pip3 install \
-        sphinx==2.0 \
+        sphinx==2.0.1 \
         sphinx-autobuild \
         sphinxcontrib-blockdiag \
         sphinxcontrib-seqdiag \
@@ -24,7 +24,7 @@ RUN apk add --update --no-cache \
 
 FROM alpine:3.6
 
-ENV PLANTUML_VERSION 1.2019.4
+ENV PLANTUML_VERSION 1.2019.5
 
 COPY --from=builder /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 COPY --from=builder /usr/bin/sphinx-* /usr/bin/
@@ -40,7 +40,7 @@ COPY --from=builder /usr/lib/python3.6/site-packages/ /usr/lib/python3.6/site-pa
 RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
         python3 \
         make \
-        gosu \
+        su-exec \
         zlib \
         libjpeg-turbo \
         freetype \

@@ -1,8 +1,6 @@
 #!/bin/sh
 
-if [ "${USE_GOSU:-0}" -eq 0 ]; then
-  cmd=""
-else
+if [ "${SWITCH_USER:-0}" -ne 0 ]; then
   USER_ID=${LOCAL_UID:-9001}
   GROUP_ID=${LOCAL_GID:-9001}
   
@@ -13,6 +11,8 @@ else
   adduser -S -u $USER_ID -G user user
   export HOME=/home/user
   
-  cmd="/usr/bin/gosu user"
+  cmd="/sbin/su-exec user"
+else
+  cmd=""
 fi
 exec $cmd "$@"
