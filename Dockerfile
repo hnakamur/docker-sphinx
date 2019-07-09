@@ -1,4 +1,4 @@
-FROM alpine:3.6 AS builder
+FROM alpine:3.10 AS builder
 
 RUN apk add --update --no-cache \
         python3 \
@@ -10,8 +10,9 @@ RUN apk add --update --no-cache \
         libjpeg-turbo-dev \
         freetype-dev \
         tzdata \
+    && pip3 install --upgrade pip \
     && pip3 install \
-        sphinx==2.0.1 \
+        sphinx==2.1.2 \
         sphinx-autobuild \
         sphinxcontrib-blockdiag \
         sphinxcontrib-seqdiag \
@@ -20,24 +21,25 @@ RUN apk add --update --no-cache \
         sphinxcontrib-plantuml \
         sphinx-copybutton \
         git+https://github.com/draftcode/japanese-text-join \
-        solar-theme
+        sphinx_py3doc_enhanced_theme
 
-FROM alpine:3.6
+FROM alpine:3.10
 
-ENV PLANTUML_VERSION 1.2019.5
+ENV PLANTUML_VERSION 1.2019.7
 
 COPY --from=builder /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 COPY --from=builder /usr/bin/sphinx-* /usr/bin/
-COPY --from=builder /usr/lib/python3.6/site-packages/ /usr/lib/python3.6/site-packages/ 
+COPY --from=builder /usr/lib/python3.7/site-packages/ /usr/lib/python3.7/site-packages/
 
-# Installation of PlantUML and OpenJDK are based on the following Dockerfiles.
+# Installation of PlantUML is based on the following Dockerfiles.
 # PlantUML
 # https://github.com/miy4/docker-plantuml/blob/7f4d1fabd2cd71da6201a41c2aca5e2ed3807a29/Dockerfile
-# OpenJDK
-# https://github.com/docker-library/openjdk/blob/47a6539cd18023dafb45db9013455136cc0bca07/8/jdk/alpine/Dockerfile
-# http://dl-cdn.alpinelinux.org/alpine/edge/testing/ repository is needed for installing gosu.
+#
+# The repository http://dl-cdn.alpinelinux.org/alpine/v3.6/main is needed to install
+# 'graphviz<2.39' which is known to work well with PlantUML.
+# Refer "Which version of Graphviz should I use ?" at http://plantuml.com/en/faq
 
-RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.6/main \
         python3 \
         make \
         su-exec \
