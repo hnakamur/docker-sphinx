@@ -94,3 +94,4 @@ gettext:
 .PHONY: Makefile
 %: Makefile
 	$(SPHINXBUILD) -b "$@" $(ALLSPHINXOPTS) "$(BUILDDIR)/$@"
+
