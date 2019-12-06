@@ -12,7 +12,7 @@ RUN apk add --update --no-cache \
         tzdata \
     && pip3 install --upgrade pip \
     && pip3 install \
-        sphinx==2.1.2 \
+        sphinx==2.2.2 \
         sphinx-autobuild \
         sphinxcontrib-blockdiag \
         sphinxcontrib-seqdiag \
