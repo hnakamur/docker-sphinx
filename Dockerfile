@@ -25,7 +25,7 @@ RUN apk add --update --no-cache \
 
 FROM alpine:3.10
 
-ENV PLANTUML_VERSION 1.2019.7
+ENV PLANTUML_VERSION 1.2019.12
 
 COPY --from=builder /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 COPY --from=builder /usr/bin/sphinx-* /usr/bin/
