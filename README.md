@@ -23,11 +23,11 @@ http://docs.readthedocs.io/en/latest/getting_started.html
 On Linux, you need to pass uid and gid to mount the document directory
 
 ```
-docker run --rm -it -v "$PWD:/documents" -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx my-sphinx-quickstart
+docker run --rm -it -v "$PWD:/documents" -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx my-sphinx-quickstart
 ```
 
 ```
-docker run --rm -it -v "$PWD:/documents" -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER)" hnakamur/sphinx my-sphinx-quickstart -p "YourProjectName" -a "John Doe <john.doe@example.com>" -r 1.0
+docker run --rm -it -v "$PWD:/documents" -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx my-sphinx-quickstart -p "YourProjectName" -a "John Doe <john.doe@example.com>" -r 1.0
 ```
 
 ### macOS
