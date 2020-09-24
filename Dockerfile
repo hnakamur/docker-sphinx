@@ -1,8 +1,9 @@
-FROM alpine:3.10 AS builder
+FROM alpine:3.12 AS builder
 
 RUN apk add --update --no-cache \
         python3 \
         python3-dev \
+        py3-pip \
         make \
         build-base \
         git \
@@ -12,7 +13,7 @@ RUN apk add --update --no-cache \
         tzdata \
     && pip3 install --upgrade pip \
     && pip3 install \
-        sphinx==2.2.2 \
+        sphinx==3.2.1 \
         sphinx-autobuild \
         sphinxcontrib-blockdiag \
         sphinxcontrib-seqdiag \
@@ -23,30 +24,32 @@ RUN apk add --update --no-cache \
         git+https://github.com/draftcode/japanese-text-join \
         sphinx_py3doc_enhanced_theme
 
-FROM alpine:3.10
+FROM alpine:3.12
 
-ENV PLANTUML_VERSION 1.2019.12
+# You can check the latest version at https://sourceforge.net/projects/plantuml/
+ENV PLANTUML_VERSION 1.2020.17
 
 COPY --from=builder /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 COPY --from=builder /usr/bin/sphinx-* /usr/bin/
-COPY --from=builder /usr/lib/python3.7/site-packages/ /usr/lib/python3.7/site-packages/
+COPY --from=builder /usr/lib/python3.8/site-packages/ /usr/lib/python3.8/site-packages/
 
 # Installation of PlantUML is based on the following Dockerfiles.
 # PlantUML
 # https://github.com/miy4/docker-plantuml/blob/7f4d1fabd2cd71da6201a41c2aca5e2ed3807a29/Dockerfile
 #
-# The repository http://dl-cdn.alpinelinux.org/alpine/v3.6/main is needed to install
-# 'graphviz<2.39' which is known to work well with PlantUML.
-# Refer "Which version of Graphviz should I use ?" at http://plantuml.com/en/faq
+# The latest version of PlantUML works with GraphViz 2.44 according to
+# https://twitter.com/PlantUML/status/1299766917260075009
+# You can install GraphViz 2.44 on alpine:3.12
+# https://pkgs.alpinelinux.org/packages?name=graphviz&branch=v3.12
 
-RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.6/main \
+RUN apk add --update --no-cache \
         python3 \
         make \
         su-exec \
         zlib \
         libjpeg-turbo \
         freetype \
-        'graphviz<2.39' \
+        'graphviz=2.44.0-r0' \
         ttf-droid \
         ttf-droid-nonlatin \
         openjdk8-jre \

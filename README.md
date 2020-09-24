@@ -111,7 +111,7 @@ This dockerfile include [sphinx-autobuild](https://github.com/GaretJax/sphinx-au
 ### Linux
 
 ```
-docker run --rm -it -v "$PWD:/documents" -p 8000:8000 -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx sphinx-autobuild source build/html -H 0.0.0.0
+docker run --rm -it -v "$PWD:/documents" -p 8000:8000 -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx sphinx-autobuild --host 0.0.0.0 source build/html
 ```
 
 You can see the output at http://127.0.0.1:8000
@@ -119,7 +119,7 @@ You can see the output at http://127.0.0.1:8000
 If you would like to change the port and the listen address, for example 8888 and 127.0.0.1
 
 ```
-docker run --rm -it -v "$PWD:/documents" -p 8888:8000 -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx sphinx-autobuild source build/html -H 127.0.0.1
+docker run --rm -it -v "$PWD:/documents" -p 8888:8000 -e SWITCH_USER=1 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) hnakamur/sphinx sphinx-autobuild --host 0.0.0.0 source build/html
 ```
 
 When you are done, press Control-C to stop autobuild and go back to the prompt.
@@ -127,7 +127,7 @@ When you are done, press Control-C to stop autobuild and go back to the prompt.
 ### macOS
 
 ```
-docker run --rm -it -v "$PWD:/documents" -p 8000:8000 hnakamur/sphinx sphinx-autobuild source build/html -H 0.0.0.0
+docker run --rm -it -v "$PWD:/documents" -p 8000:8000 hnakamur/sphinx sphinx-autobuild --host 0.0.0.0 source build/html
 ```
 
 You can see the output at http://127.0.0.1:8000
@@ -135,7 +135,7 @@ You can see the output at http://127.0.0.1:8000
 If you would like to change the port and the listen address, for example 8888 and 127.0.0.1
 
 ```
-docker run --rm -it -v "$PWD:/documents" -p 8888:8000 hnakamur/sphinx sphinx-autobuild source build/html -H 127.0.0.1
+docker run --rm -it -v "$PWD:/documents" -p 8888:8000 hnakamur/sphinx sphinx-autobuild --host 0.0.0.0 source build/html
 ```
 
 When you are done, press Control-C to stop autobuild and go back to the prompt.
@@ -143,7 +143,7 @@ When you are done, press Control-C to stop autobuild and go back to the prompt.
 ### Windows
 
 ```
-docker run --rm -it -v "%cd%:/documents" -p 8000:8000 hnakamur/sphinx sphinx-autobuild source build/html -H 0.0.0.0
+docker run --rm -it -v "%cd%:/documents" -p 8000:8000 hnakamur/sphinx sphinx-autobuild --host 0.0.0.0 source build/html
 ```
 
 You can see the output at http://127.0.0.1:8000
@@ -151,7 +151,7 @@ You can see the output at http://127.0.0.1:8000
 If you would like to change the port and the listen address, for example 8888 and 127.0.0.1
 
 ```
-docker run --rm -it -v "%cd%:/documents" -p 8888:8000 hnakamur/sphinx sphinx-autobuild source build/html -H 127.0.0.1
+docker run --rm -it -v "%cd%:/documents" -p 8888:8000 hnakamur/sphinx sphinx-autobuild --host 127.0.0.1 source build/html
 ```
 
 You also need to run `docker-windows-volume-watcher.exe` on another command prompt.
