@@ -22,7 +22,7 @@ RUN apk add --update --no-cache \
         sphinxcontrib-plantuml \
         sphinx-copybutton \
         git+https://github.com/draftcode/japanese-text-join \
-        sphinx_py3doc_enhanced_theme
+        sphinx-better-theme
 
 FROM alpine:3.12
 
