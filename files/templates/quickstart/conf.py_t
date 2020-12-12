@@ -165,15 +165,15 @@ todo_include_todos = True
 
 # -- pdf print styles settings -----------------------------------------------
 def setup(app):
-    app.add_stylesheet('css/code-block.css')
-    app.add_stylesheet('css/print-reset.css')
-    app.add_stylesheet('css/print-theme-default.css')
-    app.add_javascript('js/print.js')
+    app.add_css_file('css/code-block.css')
+    app.add_css_file('css/print-reset.css')
+    app.add_css_file('css/print-theme-default.css')
+    app.add_js_file('js/print.js')
 
 # -- sphinx-themes -----------------------------------------------------------
 # If you would like to use a different theme, do the following.
 # 1. Copy code from conf.py of your favorite theme at https://sphinx-themes.org/
 # 2. Modify Dockerfile to install the theme.
-import sphinx_py3doc_enhanced_theme
-html_theme = "sphinx_py3doc_enhanced_theme"
-html_theme_path = [sphinx_py3doc_enhanced_theme.get_html_theme_path()]
+from better import better_theme_path
+html_theme_path = [better_theme_path]
+html_theme = 'better'

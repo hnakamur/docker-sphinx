@@ -13,7 +13,7 @@ RUN apk add --update --no-cache \
         tzdata \
     && pip3 install --upgrade pip \
     && pip3 install \
-        sphinx==3.2.1 \
+        sphinx==3.3.1 \
         sphinx-autobuild \
         sphinxcontrib-blockdiag \
         sphinxcontrib-seqdiag \
@@ -22,12 +22,12 @@ RUN apk add --update --no-cache \
         sphinxcontrib-plantuml \
         sphinx-copybutton \
         git+https://github.com/draftcode/japanese-text-join \
-        sphinx_py3doc_enhanced_theme
+        sphinx-better-theme
 
 FROM alpine:3.12
 
 # You can check the latest version at https://sourceforge.net/projects/plantuml/
-ENV PLANTUML_VERSION 1.2020.17
+ENV PLANTUML_VERSION 1.2020.22
 
 COPY --from=builder /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 COPY --from=builder /usr/bin/sphinx-* /usr/bin/
