@@ -27,7 +27,7 @@ RUN apk add --update --no-cache \
 FROM alpine:3.12
 
 # You can check the latest version at https://sourceforge.net/projects/plantuml/
-ENV PLANTUML_VERSION 1.2020.17
+ENV PLANTUML_VERSION 1.2020.22
 
 COPY --from=builder /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 COPY --from=builder /usr/bin/sphinx-* /usr/bin/
